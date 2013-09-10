@@ -1,10 +1,9 @@
-/res/
-/obj/
+/res
+/obj
+/bin
 
 *.exe
 *.config
-*.dll
-*.xml
 *.db
 *.pdb
 *.manifest
