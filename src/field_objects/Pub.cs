@@ -7,7 +7,7 @@ namespace Alkonaut
     class Pub : FieldObject
     {
         public Pub(Translator translator) 
-            : base(translator, "pub.png", -1, 0)
+            : base(new SingleTextureRenderer(translator, -1, 0, "pub.png"))
         {
         }
     }

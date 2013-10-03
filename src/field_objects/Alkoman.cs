@@ -3,32 +3,28 @@
     class Alkoman : FieldObject
     {
         const int SLEEP_PAUSE = 5;
-        readonly string[] textureNames = new string[5] { "alkonaut_down.png", "alkonaut_up.png", "alkonaut_right.png", "alkonaut_left.png", "alkonaut_sleep.png" };
 
         public enum State { READY, SLEEP };
         public enum Moves { UP, DOWN, RIGHT, LEFT };
 
-        int sleepingTickCounter = 0, currentTextureIndex = 0;
-        State state = State.READY;
+        static readonly string[] textureNames = new string[5] { "alkonaut_down.png", "alkonaut_up.png", "alkonaut_right.png", "alkonaut_left.png", "alkonaut_sleep.png" };
+        
+        readonly MultiTextureRenderer myRenderer;
+
+        int sleepingTickCounter = 0;
+        State state = State.READY;       
 
         public Alkoman(Translator translator)
-            : base(translator, "alkonaut_down.png")
+            : base(new MultiTextureRenderer(translator, 0, 0, textureNames, 0))
         {
-            base.setupManyTextures(textureNames);
-        }
-
-        public override void OnRender()
-        {
-            base.setupTextureIndex(currentTextureIndex);
-            base.OnRender();
+            myRenderer = (MultiTextureRenderer)renderer;
         }
 
         public void Move(Moves direction)
         {
             if (state == State.READY)
             {
-                bool wasMoved = tryMove(direction);
-                if (wasMoved) { updateTextureRectangle(); }
+                tryMove(direction);
             }
             else if (++sleepingTickCounter == SLEEP_PAUSE)
             {
@@ -43,69 +39,69 @@
 
             switch (direction)
             {
-                case (Moves.UP):
-                    currentTextureIndex = 1;
-                    if (position.Y > 0)
+                case (Moves.UP):                    
+                    myRenderer.TextureNameIndex = 1;
+                    if (renderer.Y > 0)
                     {
-                        if (position.Y - 1 == Column.Y && position.X == Column.X)
+                        if (renderer.Y - 1 == Column.Y && renderer.X == Column.X)
                         {
                             state = State.SLEEP;
-                            currentTextureIndex = 4;
+                            myRenderer.TextureNameIndex = 4;
                         }
                         else
-                        {                            
-                            --position.Y;
+                        {
+                            renderer.Move(0, -1);
                             ret = true;
                         }
                     }
                     break;
 
                 case (Moves.DOWN):
-                    currentTextureIndex = 0;
-                    if (position.Y < Field.CELLS - 1)
+                    myRenderer.TextureNameIndex = 0;
+                    if (renderer.Y < Field.CELLS - 1)
                     {
-                        if (position.Y + 1 == Column.Y && position.X == Column.X)
+                        if (renderer.Y + 1 == Column.Y && renderer.X == Column.X)
                         {
                             state = State.SLEEP;
-                            currentTextureIndex = 4;
+                            myRenderer.TextureNameIndex = 4;
                         }
                         else
                         {
-                            ++position.Y;
+                            renderer.Move(0, 1);
                             ret = true;
                         }
                     }
                     break;
 
                 case (Moves.RIGHT):
-                    currentTextureIndex = 2;
-                    if (position.X < Field.CELLS - 1)
+                    myRenderer.TextureNameIndex = 2;
+                    if (renderer.X < Field.CELLS - 1)
                     {
-                        if (position.X + 1 == Column.X && position.Y == Column.Y)
+                        if (renderer.X + 1 == Column.X && renderer.Y == Column.Y)
                         {
                             state = State.SLEEP;
-                            currentTextureIndex = 4;
+                            myRenderer.TextureNameIndex = 4;
                         }
                         else
                         {
-                            ++position.X;
+                            renderer.Move(1, 0);
                             ret = true;
                         }
                     }
                     break;
 
                 case (Moves.LEFT):
-                    currentTextureIndex = 3;
-                    if (position.X > 0)
+                    myRenderer.TextureNameIndex = 3;
+                    if (renderer.X > 0)
                     {
-                        if (position.X - 1 == Column.X && position.Y == Column.Y)
+                        if (renderer.X - 1 == Column.X && renderer.Y == Column.Y)
                         {
                             state = State.SLEEP;
-                            currentTextureIndex = 4;
+                            myRenderer.TextureNameIndex = 4;
                         }
                         else
                         {
-                            --position.X;
+                            renderer.Move(-1, 0);
                             ret = true;
                         }
                     }

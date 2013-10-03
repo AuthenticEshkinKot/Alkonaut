@@ -7,14 +7,14 @@ namespace Alkonaut
 {
     static class TextureLoader
     {
-        const int TEXTURE_NUMBER = 7;
-        static int[] TextureObjects = new int[TEXTURE_NUMBER];
+        const int MAX_TEXTURE_NUMBER = 7;
+        static int[] TextureObjects = new int[MAX_TEXTURE_NUMBER];
         static int index;
 
         public static void OnLoad()
         {
             GL.Enable(EnableCap.Texture2D);
-            GL.GenTextures(TEXTURE_NUMBER, TextureObjects);
+            GL.GenTextures(MAX_TEXTURE_NUMBER, TextureObjects);
 
             index = 0;
         }

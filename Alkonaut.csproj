@@ -63,16 +63,20 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="src\Alkoman.cs" />
-    <Compile Include="src\Column.cs" />
+    <Compile Include="src\field_objects\Alkoman.cs" />
+    <Compile Include="src\field_objects\Column.cs" />
     <Compile Include="src\Field.cs" />
-    <Compile Include="src\FieldObject.cs" />
     <Compile Include="src\Game.cs" />
     <Compile Include="src\GameLogic.cs" />
+    <Compile Include="src\renderers\AbstractRenderer.cs" />
+    <Compile Include="src\renderers\IRenderer.cs" />
     <Compile Include="src\IGameObject.cs" />
+    <Compile Include="src\field_objects\FieldObject.cs" />
     <Compile Include="src\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="src\Pub.cs" />
+    <Compile Include="src\field_objects\Pub.cs" />
+    <Compile Include="src\renderers\MultiTextureRenderer.cs" />
+    <Compile Include="src\renderers\SingleTextureRenderer.cs" />
     <Compile Include="src\StepsViewer.cs" />
     <Compile Include="src\TextureLoader.cs" />
     <Compile Include="src\Translator.cs" />

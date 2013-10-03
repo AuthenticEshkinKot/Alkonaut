@@ -5,7 +5,7 @@
         public const int X = 7, Y = 7;
 
         public Column(Translator translator)
-            : base(translator, "column.png", X, Y)
+            : base(new SingleTextureRenderer(translator, X, Y, "column.png"))
         {
         }
     }

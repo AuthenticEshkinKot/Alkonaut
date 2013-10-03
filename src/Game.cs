@@ -75,7 +75,7 @@ namespace Alkonaut
 
             Field field = new Field(screenWidth, screenHeight);
             Translator translator = new Translator(field);
-            FieldObject alkoman = new Alkoman(translator), column = new Column(translator), pub = new Pub(translator);
+            FieldObject alkoman = new Alkoman(translator), pub = new Pub(translator), column = new Column(translator);
             logic = new GameLogic((Alkoman)alkoman);
             StepsViewer stepsViewer = new StepsViewer(field, logic, screenHeight / 2);
 
